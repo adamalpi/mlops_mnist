@@ -1,0 +1,41 @@
+openapi: "3.0.0"
+
+info:
+  title: "Inference API"
+  version: 0.1.0
+
+servers:
+  - url: /api/v1.0
+    description: test API for inferencing
+
+paths:
+  /inference:
+    post:
+      summary: Runs inference of a model
+      tags:
+        - public
+      parameters:
+        - in: query
+          name: "experiment_name"
+          required: true
+          description: "Name of the experiment that would correctly refer to a model trained for that experiment."
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image_blob:
+                  type: string
+                  format: binary
+      operationId: api.inference
+      responses:
+        '200':
+          description: 'Returns classification result.'
+
+tags:
+- name: public
+  description: Inference Service
+
