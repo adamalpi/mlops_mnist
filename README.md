@@ -1,0 +1,1 @@
+# MLOps for MNIST data
