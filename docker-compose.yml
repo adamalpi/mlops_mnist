@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  web:
+    container_name: web
+    build: ./web
+    ports: 
+      - "8501:8501"
+    networks:
+      EdgeNetwork:
+    depends_on:
+      - backend
+      - db
+
+  backend:
+    container_name: backend
+    build: ./service
+    ports:
+      - "9090:9090"
+    networks:
+      EdgeNetwork:
+
+  db:
+    container_name: db
+    build: ./data
+    ports: 
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "pass123"
+    networks:
+      EdgeNetwork:
+
+###### NETWORK CONFIG ######
+networks:
+  EdgeNetwork:
